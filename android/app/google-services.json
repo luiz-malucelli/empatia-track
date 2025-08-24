@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "755365928017",
+    "project_id": "empatia-track",
+    "storage_bucket": "empatia-track.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755365928017:android:8f98b60149c062048cec70",
+        "android_client_info": {
+          "package_name": "com.jogoempatia.empatiatrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755365928017-c7khncfdkckrnk60efj4lj9t9h3sfll2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jogoempatia.empatiatrack",
+            "certificate_hash": "9055603f51dad2717ff4824c5762f78a96ab1b19"
+          }
+        },
+        {
+          "client_id": "755365928017-hk61vflhrdh054stc0ht395dn530h9qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jogoempatia.empatiatrack",
+            "certificate_hash": "a0e6c7418fdb463734f0ac2f11f45a11e81a4ab9"
+          }
+        },
+        {
+          "client_id": "755365928017-lkcfuimvhtkpl3ts35l6cka50iuqsvah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jogoempatia.empatiatrack",
+            "certificate_hash": "c1064c8f0893d0e645234caa161fc7289e440bda"
+          }
+        },
+        {
+          "client_id": "755365928017-kk9mp3tbt5oj5ihqavv6r5ltforl0h2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPiRGGC3Y-XnhF4C7ureJb6JZRvBPEd1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755365928017-kk9mp3tbt5oj5ihqavv6r5ltforl0h2g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "755365928017-2g5ls2en45ooje241ra32ag1engc8e7d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jogoempatia.empatiatrack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Luiz Flavio Moreira Malucelli on 21/07/24.
+  
+*/
+CFBundleDisplayName = "Empatia Track";
+CFBundleName = "Empatia Track";
+NSCameraUsageDescription = "Este aplicativo requer acesso à câmera para tirar a sua foto de perfil.";
+NSPhotoLibraryUsageDescription = "Este aplicativo requer acesso à sua biblioteca de fotos para salvar uma imagem das tabelas e gráficos.";
+NSPhotoLibraryAdditionUsageDescription = "Este aplicativo requer acesso à sua biblioteca de fotos para salvar uma imagem das tabelas e gráficos.";
+NSFaceIDUsageDescription = "Precisamos de acesso ao Face ID para autenticar você com segurança.";

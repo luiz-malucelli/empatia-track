@@ -1,0 +1,127 @@
+{
+
+  "empatiaAppName": "Empatia Track",
+  "appLanguage": "en",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "save": "Save",
+  "yes": "Yes",
+  "no": "No",
+  "alert": "Alert",
+  "noDaysFromFuture": "You cannot register days from the future.",
+  "noMonthFromFuture": "You cannot select a future month.",
+
+  "small": "Small",
+  "medium": "Medium",
+  "large": "Large",
+
+  "textSize": "Text size",
+  "deleteData": "Delete data",
+  "deleteDataAlert": "Are you sure you want to delete the data from the device's memory?",
+
+
+  "registerMyDay": "Register my day",
+  "howWasYourDay": "How was your day?",
+  "useUpToFivePoints": "Use up to 5 points",
+  "hinTextNotes": "Write notes about your day\n(optional)\n",
+  "saveMyDay": "Save my day",
+  "highlights": "Highlights",
+  "week": "Week",
+  "month": "Month",
+  "year": "Year",
+  "pointsUsed": "Points used per day through the",
+
+  "welcome": "Welcome",
+  "useTheBlueButtons": "Use the blue buttons",
+  "toUseYourPoints": "to use your points.",
+
+  "joy": "Joy",
+  "peace": "Peace",
+  "anger": "Anger",
+  "worry": "Stress",
+  "sadness": "Sadness",
+
+
+  "sharePdf": "Share PDF",
+  "saveImagePhotos": "Save image",
+
+
+  "aboutTheDeveloper": "About the developer",
+  "developedBy": "Developed by:",
+  "quickInfo": "Quick info",
+  "detailedInfo": "Detailed info",
+  "contactInfo": "Contact info",
+  "empatiaQuestion": "What is the goal of Empatia Produtos Psicopedagógicos?",
+  "empatiaShortAnswer": "Since 2018 our goal has been to provide a safe and engaging space for children and adults to learn and grow.",
+  "empatiaLongAnswer": "Empatia Produtos Psicopedagógicos is a brazilian company, and since its founding has been dedicated to providing a safe and engaging space for children and adults to learn and grow.\n\nOur journey began with the launch of Jogo Empatia, an innovative emotional intelligence card game designed to foster empathy and understanding. This initial product featured a single box with 3 different types of cards: feelings, what's important, and choices.\n\nIn 2020, we launched two new boxes, introducing 6 new types of cards: areas of life, thoughts, paths of self-discovery, body awareness, body parts, and bodily sensations.\n\nAll of the cards were designed to be modular, allowing users to mix and match cards to create unique and personalized learning experiences.\n\nIn 2024, we are excited to bring the essence of our physical products to the digital world with the launch of the Empatia app. This app version of our beloved card game continues our mission of fostering emotional intelligence and personal growth, providing a modern and accessible platform for users to explore and develop their skills.\n\nAnd after the launch of the Empatia app, in collaboration with mental health professionals, we developed the Empatia Track app to assist and support everyone seeking to understand their mental health.",
+  "faceBehindQuestion": "The face behind Empatia",
+  "faceBehindShortAnswer": "Luiz Flávio Moreira Malucelli has been developing educational tools for over 8 years, focusing on creating a positive impact.\n\nThe Empatia Track app, entirely written by him and developed in collaboration with mental health professionals, aims to assist and support everyone seeking to understand their mental health.\n\nIf you are enjoying Empatia Track, make sure to also check Empatia app, available at App Store. Explore more than 300+ cards and create emotional maps to better understand yourself.",
+  "faceBehindLongAnswer": "Luiz Flávio Moreira Malucelli is the founder and the driving force behind Empatia Produtos Psicopedagógicos.\n\nWith over 8 years of experience in developing educational tools, Luiz has been dedicated to creating meaningful and impactful learning experiences for children and adults alike.\n\nDriven by a passion for education and technology, Luiz embarked on the journey to create apps designed to foster growth and understanding.\n\nHis dedication and expertise are reflected in every aspect of the app, which he single-handedly developed.\n\nFor Luiz, Empatia is a mission to empower individuals to learn and thrive in a safe and nurturing environment.",
+
+
+  "libraryDeniedSaveImageIOS": "Photo library access is required to save an image of your charts. \n\nPlease enable it in the Settings app under Settings > Empatia Track.",
+  "libraryDeniedSaveImageAndroid": "Photo library access is required to save an image of your charts.\n\nPlease enable it in the devices Settings app under Settings > Apps > Empatia Track > Permissions.",
+
+  "welcomeToEmpatiaTrack": "Welcome to\nEmpatia Track",
+  "continueWithApple": "Continue with Apple",
+  "continueWithGoogle": "Continue with Google",
+
+
+  "agreeToTermsAndPrivacy1_2": "By pressing continue, you agree to our",
+  "termsOfUse": "Terms of Use",
+  "agreeToTermsAndPrivacy2_2": " and ",
+  "privacyPolicy": "Privacy Policy",
+
+  "signInWithAppleAndroidAlert": "Sign in with Apple is only available on iOS devices. Please use an alternative sign-in method.",
+  "error": "Error:",
+  "failedToAuthenticateGoogle": "Failed to authenticate with Google.",
+
+  "myAccount": "My account",
+  "logOut": "Log out",
+  "deleteAccount": "Delete account",
+  "deleteAccountAlert": "Are you sure you want to delete your account?",
+  "accountDeletedSuccessfully": "Account deleted succesfully",
+
+  "appleIdLinked": "Apple ID linked",
+  "linkAppleId": "Link Apple ID",
+  "googleAccountLinked": "Google account linked",
+  "linkGoogleAccount": "Link Google account",
+  "linkAppleIdAlert": "Are you sure you want to link your Apple ID?",
+  "unlinkAppleIdAlert": "Are you sure you want to unlink your Apple ID",
+  "linkGoogleAccountAlert": "Are you sure you want to link your Google account?",
+  "unlinkGoogleAccountAlert": "Are you sure you want to unlink your Google account?",
+  "appleIdLinkedSuccessfully": "Apple ID linked successfully",
+  "googleAccountLinkedSuccessfully": "Google account linked successfully",
+  "appleIdUnlinkedSuccessfully": "Apple ID linked successfully",
+  "googleAccountUnlinkedSuccessfully": "Google account linked successfully",
+
+  "invalidCustomToken": "The custom token format is invalid. Please try again.",
+  "customTokenMismatch": "There's a mismatch in the custom token. Please check and try again.",
+  "invalidCredential": "Your sign-in credentials are no longer valid. Please sign in again.",
+  "operationNotAllowed": "This sign-in method is not allowed.",
+  "emailAlreadyInUse": "This email is already in use. Please use a different email.",
+  "invalidEmail": "The email address is badly formatted. Please enter a valid email.",
+  "wrongPassword": "Incorrect password. Please try again.",
+  "tooManyRequests": "You've made too many requests in a short period. Please wait before trying again.",
+  "userNotFound": "No user found with this information. Please check and try again.",
+  "accountExistsWithDifferentCredential": "An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.",
+  "requiresRecentLogin": "This operation is sensitive and requires recent authentication. Please sign in again before retrying this request.",
+  "providerAlreadyLinked": "This provider is already linked to your account.",
+  "noSuchProvider": "The specified provider is not linked to your account.",
+  "invalidUserToken": "Your session has expired. Please sign in again.",
+  "networkError": "A network error occurred. Check your internet connection and try again.",
+  "userTokenExpired": "Your session token has expired. Please sign in again.",
+  "userMismatch": "The action you are trying to perform is not available to your account.",
+  "credentialAlreadyInUse": "These sign-in credentials are already associated with another user account.",
+  "weakPassword": "The password is too weak. Please choose a stronger password.",
+  "keychainError": "An error occurred trying to access the keychain.",
+  "internalError": "An internal error occurred. Please try again later.",
+  "defaultFirebaseError": "An unknown Firebase error occurred. Please try again.",
+  "defaultError": "An error occurred. Please try again.",
+  "phoneLinkedToOtherAccountError": "An unknown error related to your linked phone number occurred. Please try again.",
+  "verificationCodeIncorrect": "Please make sure you've entered the correct 6-digit verification code we sent via SMS. Check your message and try again.",
+
+  "userDisabled": "Your account has been disabled. Please contact info+app@jogoempatia.com for support.",
+  "invalidAPIKey": "An issue occurred with the app's API key. Please restart the app. If the problem persists, contact support at info+app@jogoempatia.com",
+  "appNotAuthorized": "This app is currently not authorized to use Firebase Authentication. Please restart the app. If the problem persists, contact support at info+app@jogoempatia.com"
+}
