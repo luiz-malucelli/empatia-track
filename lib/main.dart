@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:empatiatrack/0/1_googleSignIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -49,6 +50,9 @@ Future<void> main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  await initGoogleSignIn(clientId: '755365928017-2g5ls2en45ooje241ra32ag1engc8e7d.apps.googleusercontent.com');
+
   runApp(const MyApp());
 }
 

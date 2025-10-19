@@ -20,7 +20,7 @@ class CustomSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var brightness = Theme.of(context).brightness;
-    final bgBoxColor = Theme.of(context).colorScheme.surface.withValues(alpha: brightness == Brightness.dark ? 1.0 : 0.7);
+    final bgBoxColor = brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -303,11 +303,14 @@ class CustomPopupMenuButtonState<T> extends State<CustomPopupMenuButton<T>> {
 
   @override
   Widget build(BuildContext context) {
+    var brightness = Theme.of(context).brightness;
+
     return PopupMenuButton<T>(
       key: ValueKey(widget.popupMenuItemString),
       offset: const Offset(13, 22),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-      color: Theme.of(context).colorScheme.surface,
+      color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(
+          132, 204, 211, 1.0),
       elevation: 2,
       shadowColor: Colors.black,
       onOpened: () => _setOpacity(0.5),

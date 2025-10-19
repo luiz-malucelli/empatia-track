@@ -237,15 +237,7 @@ class _LoginViewState extends State<LoginView> {
                           if (googleSignInResponse.error.toString().contains('ID Token expired')) {
                             print('entered block for google sign out');
 
-                            final GoogleSignIn googleSignIn = GoogleSignIn();
-
-                            try {
-                              // Sign out the user to clear any cached session
-                              await googleSignIn.disconnect();
-                              print('Google disconnect successful');
-                            } catch (e) {
-                              print('Google disconnect failed: $e');
-                            }
+                            firebaseServices.signOutAll();
                           }
                         }
                       }

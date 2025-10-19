@@ -254,6 +254,12 @@ abstract class AppLocalizations {
   /// **'Points used per day through the'**
   String get pointsUsed;
 
+  /// No description provided for @checkHighlight.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out this day'**
+  String get checkHighlight;
+
   /// No description provided for @welcome.
   ///
   /// In en, this message translates to:

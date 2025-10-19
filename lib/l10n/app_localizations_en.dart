@@ -88,6 +88,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pointsUsed => 'Points used per day through the';
 
   @override
+  String get checkHighlight => 'Check out this day';
+
+  @override
   String get welcome => 'Welcome';
 
   @override

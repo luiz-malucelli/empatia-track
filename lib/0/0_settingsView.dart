@@ -254,7 +254,7 @@ class _SettingsViewState extends State<SettingsView> {
           children: [
             Icon(
               isSelected ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle,
-              color: isSelected ? Colors.blue : Colors.grey,
+              color: isSelected ? Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.8) : Colors.grey,
               size: 22,
             ),
             const SizedBox(width: 8),

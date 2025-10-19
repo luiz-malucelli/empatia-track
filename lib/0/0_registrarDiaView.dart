@@ -146,75 +146,77 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
     var brightness = Theme.of(context).brightness;
     final FirebaseServices firebaseServices = FirebaseServices();
 
-    Widget welcomeExplanation = Dialog(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-
-            Text(loc?.welcome ?? '',
-              style: TextStyle(fontSize: fontSize(24, viewModel), fontWeight: FontWeight.bold),
-            ),
-
-            const SizedBox(height: 15),
-
-            Text(loc?.useTheBlueButtons ?? '', style: TextStyle(fontSize: fontSize(16, viewModel))),
-
-            const SizedBox(height: 7),
-
-            Row(mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40, // Width of the circular background
-                      height: 40, // Height of the circular background
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
-                      ),
-                    ),
-                    Positioned(left: 0, right: 3,
-                        child:  Icon(CupertinoIcons.chevron_left, size: 30, color: Colors.white)),
-                  ],
-                ),
-
-                const SizedBox(width: 10),
-
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40, // Width of the circular background
-                      height: 50, // Height of the circular background
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
-                      ),
-                    ),
-                    Positioned(left: 3, right: 0,
-                        child: Icon(CupertinoIcons.chevron_right, size: 30, color: Colors.white)),
-                  ],
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 7),
-
-            Text(loc?.toUseYourPoints ?? '', style: TextStyle(fontSize: fontSize(16, viewModel))),
-
-            const SizedBox(height: 7),
-
-          ],
-        ),
-      ),
-    );
+    // Widget welcomeExplanation = Dialog(
+    //   backgroundColor: Theme.of(context).colorScheme.secondary,
+    //   shape: RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.circular(20.0),
+    //   ),
+    //   child: GestureDetector(onTap: Navigator.of(context).pop,
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(20.0),
+    //       child: Column(
+    //         mainAxisSize: MainAxisSize.min,
+    //         children: [
+    //
+    //           Text(loc?.welcome ?? '',
+    //             style: TextStyle(fontSize: fontSize(24, viewModel), fontWeight: FontWeight.bold),
+    //           ),
+    //
+    //           const SizedBox(height: 15),
+    //
+    //           Text(loc?.useTheBlueButtons ?? '', style: TextStyle(fontSize: fontSize(16, viewModel))),
+    //
+    //           const SizedBox(height: 7),
+    //
+    //           Row(mainAxisAlignment: MainAxisAlignment.center,
+    //             children: [
+    //               Stack(
+    //                 alignment: Alignment.center,
+    //                 children: [
+    //                   Container(
+    //                     width: 40, // Width of the circular background
+    //                     height: 40, // Height of the circular background
+    //                     decoration: BoxDecoration(
+    //                       shape: BoxShape.circle,
+    //                       color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
+    //                     ),
+    //                   ),
+    //                   Positioned(left: 0, right: 3,
+    //                       child:  Icon(CupertinoIcons.chevron_left, size: 30, color: Colors.white)),
+    //                 ],
+    //               ),
+    //
+    //               const SizedBox(width: 10),
+    //
+    //               Stack(
+    //                 alignment: Alignment.center,
+    //                 children: [
+    //                   Container(
+    //                     width: 40, // Width of the circular background
+    //                     height: 50, // Height of the circular background
+    //                     decoration: BoxDecoration(
+    //                       shape: BoxShape.circle,
+    //                       color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
+    //                     ),
+    //                   ),
+    //                   Positioned(left: 3, right: 0,
+    //                       child: Icon(CupertinoIcons.chevron_right, size: 30, color: Colors.white)),
+    //                 ],
+    //               ),
+    //             ],
+    //           ),
+    //
+    //           const SizedBox(height: 7),
+    //
+    //           Text(loc?.toUseYourPoints ?? '', style: TextStyle(fontSize: fontSize(16, viewModel))),
+    //
+    //           const SizedBox(height: 7),
+    //
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
 
     return Scaffold(
       appBar: AppBar(
@@ -229,53 +231,53 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
             Column(
               children: [
 
-                ExplanationPopCheck(explanationCheck: () {
-                  if (!viewModel.hasSeenExplanation) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return welcomeExplanation;
-                      },
-                    ).then((_) {
-                      viewModel.saveHasSeenExplanation();
-                    });
-
-                  }
-                }),
+                // ExplanationPopCheck(explanationCheck: () {
+                //   if (!viewModel.hasSeenExplanation) {
+                //     showDialog(
+                //       context: context,
+                //       builder: (BuildContext context) {
+                //         return welcomeExplanation;
+                //       },
+                //     ).then((_) {
+                //       viewModel.saveHasSeenExplanation();
+                //     });
+                //
+                //   }
+                // }),
 
                 const SizedBox(height: 10),
 
                 Text(loc?.howWasYourDay ?? '', style: TextStyle(fontSize: fontSize(28, viewModel),
                     fontWeight: FontWeight.w600),),
+                //
+                // const SizedBox(height: 15),
+                //
+                // Text(loc?.useUpToFivePoints ?? '', style: TextStyle(fontSize: fontSize(20, viewModel), color:
+                // Theme.of(context).colorScheme.onPrimary, height: 0.9), ),
 
-                const SizedBox(height: 15),
+                const SizedBox(height: 25),
 
-                Text(loc?.useUpToFivePoints ?? '', style: TextStyle(fontSize: fontSize(20, viewModel), color:
-                Theme.of(context).colorScheme.onPrimary, height: 0.9), ),
-
-                const SizedBox(height: 10),
-
-                Builder(
-                  builder: (context) {
-                    final mediaQuery = MediaQuery.of(context);
-                    if (_animation == null) {
-                      _initializeAnimation();
-                    }
-                    return AnimatedBuilder(
-                      animation: _animationController,
-                      builder: (context, child) {
-                        return Text(
-                          '$totalNumber/5',
-                          style: TextStyle(
-                            fontSize: fontSize(25, viewModel),
-                            fontWeight: FontWeight.w700,
-                            color: _flashing ? _animation?.value : Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                // Builder(
+                //   builder: (context) {
+                //     final mediaQuery = MediaQuery.of(context);
+                //     if (_animation == null) {
+                //       _initializeAnimation();
+                //     }
+                //     return AnimatedBuilder(
+                //       animation: _animationController,
+                //       builder: (context, child) {
+                //         return Text(
+                //           '$totalNumber/5',
+                //           style: TextStyle(
+                //             fontSize: fontSize(25, viewModel),
+                //             fontWeight: FontWeight.w700,
+                //             color: _flashing ? _animation?.value : Theme.of(context).colorScheme.onPrimary,
+                //           ),
+                //         );
+                //       },
+                //     );
+                //   },
+                // ),
 
 
 
@@ -293,6 +295,11 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                       happyNumber = changeNumber(happyNumber, true);
                     });
                   }, description: loc?.joy ?? '',
+                  updatePoints: (int i) {
+                    setState(() {
+                      happyNumber = i;
+                    });
+                  },
                 ),
                 EmojiDotsRow(
                   emoji: 'peace',
@@ -307,6 +314,11 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                       peaceNumber = changeNumber(peaceNumber, true);
                     });
                   }, description: loc?.peace ?? '',
+                  updatePoints: (int i) {
+                    setState(() {
+                      peaceNumber = i;
+                    });
+                  },
                 ),
                 EmojiDotsRow(
                   emoji: 'angry',
@@ -321,6 +333,11 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                       angryNumber = changeNumber(angryNumber, true);
                     });
                   }, description: loc?.anger ?? '',
+                  updatePoints: (int i) {
+                    setState(() {
+                      angryNumber = i;
+                    });
+                  },
                 ),
                 EmojiDotsRow(
                   emoji: 'afraid',
@@ -335,6 +352,11 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                       fearNumber = changeNumber(fearNumber, true);
                     });
                   }, description: loc?.worry ?? '',
+                  updatePoints: (int i) {
+                    setState(() {
+                      fearNumber = i;
+                    });
+                  },
                 ),
                 EmojiDotsRow(
                   emoji: 'sad',
@@ -349,9 +371,15 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                       sadNumber = changeNumber(sadNumber, true);
                     });
                   }, description: loc?.sadness ?? '',
+                  updatePoints: (int i) {
+                    setState(() {
+                      sadNumber = i;
+                    });
+                    print('sadNumber is: $sadNumber');
+                  },
                 ),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 30),
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -376,7 +404,7 @@ class RegistrarDiaViewState extends State<RegistrarDiaView> with WidgetsBindingO
                   ),
                 ),
 
-                const SizedBox(height: 45),
+                const SizedBox(height: 35),
 
                 GestureDetector(
                   onTap: () {
@@ -448,19 +476,21 @@ class EmojiDotsRow extends StatefulWidget {
   final double size;
   final VoidCallback? leftButtonAction;
   final VoidCallback? rightButtonAction;
+  final Function(int) updatePoints;
   final bool topPadding;
   final String description;
 
-  EmojiDotsRow({required this.emoji, required this.number, this.size = 28, this.leftButtonAction, this.rightButtonAction, this.topPadding = true, required this.description});
+  EmojiDotsRow({required this.emoji, required this.number, this.size = 28, this.leftButtonAction, this.rightButtonAction, this.topPadding = true, required this.description, required this.updatePoints});
 
   @override
   EmojiDotsRowState createState() => EmojiDotsRowState();
 }
 
 class EmojiDotsRowState extends State<EmojiDotsRow> {
-
   double leftButtonOpacity = 1.0;
   double rightButtonOpacity = 1.0;
+  final GlobalKey _dotsKey = GlobalKey();
+  DateTime? _dragStartTime;
 
   void flashButtons() {
     int flashes = 0;
@@ -480,126 +510,198 @@ class EmojiDotsRowState extends State<EmojiDotsRow> {
     });
   }
 
+  void _handlePanDown(DragDownDetails d) => _updateFromGlobal(d.globalPosition);
+  void _handlePanUpdate(DragUpdateDetails d) => _updateFromGlobal(d.globalPosition);
+
+  void _updateFromGlobal(Offset globalPos) {
+    final renderObject = _dotsKey.currentContext?.findRenderObject();
+    if (renderObject is! RenderBox) return; // bail safely
+    final box = renderObject;
+    final local = box.globalToLocal(globalPos);
+    final double width = box.size.width;
+    final double zone = width / 5.0;
+    const double resetPx = 12.0;
+
+    int count;
+    if (local.dx < -resetPx) {
+      count = 0;
+    } else {
+      count = (local.dx / zone).floor() + 1;
+      count = count.clamp(0, 5);
+    }
+
+    // final duration = _dragStartTime == null
+    //     ? Duration.zero
+    //     : DateTime.now().difference(_dragStartTime!);
+    //
+    // final isTap = duration < const Duration(milliseconds: 50);
+
+    // if (isTap) {
+    //   // Toggle-off logic for tap only
+    //   if (count == 1 && widget.number == 1) {
+    //     widget.updatePoints(0);
+    //     return;
+    //   }
+    // }
+
+    widget.updatePoints(count);
+  }
+
+  void _onPanStart(DragStartDetails d) {
+    _dragStartTime = DateTime.now();
+  }
+
+  void _onPanEnd(DragEndDetails d) {
+    // final duration = _dragStartTime == null
+    //     ? Duration.zero
+    //     : DateTime.now().difference(_dragStartTime!);
+    // print('Drag lasted ${duration.inMilliseconds} ms');
+    _dragStartTime = null;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<ViewModelGlobal>(context);
     var brightness = Theme.of(context).brightness;
+    final largeFont = viewModel.fontSize == FontSize.large;
 
-    List<Widget> dots(int number, double size) {
-      List<Widget> dotList = [];
-      for (int i = 0; i < 5; i++) {
-        dotList.add(GestureDetector(onTap: flashButtons,
-          child: Icon(i < number ? Icons.circle : Icons.circle_outlined, size: size, color: i < number ? Theme.of(context).colorScheme.onPrimary :
-          brightness == Brightness.dark ? Theme.of(context).colorScheme.onPrimary : Colors.black,),
-        ),);
-        if (i < 4) {
-          dotList.add(const SizedBox(width: 5)); // Add SizedBox only if i is not the last index
-        }
-      }
-      return dotList;
+    // This builds the row of dots only visually.
+    List<Widget> buildDots(int number, double size) {
+      return List.generate(5, (i) {
+        return Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Icon(
+            i <= number - 1 ? Icons.circle : Icons.circle_outlined,
+            size: size,
+            color: i <= number - 1
+                ? Theme.of(context).colorScheme.onPrimary
+                : (brightness == Brightness.dark
+                ? Theme.of(context).colorScheme.onPrimary
+                : Colors.black),
+          ),
+        );
+      });
     }
 
     return Padding(
-      padding: EdgeInsets.only(top: widget.topPadding ? 15 : 0, bottom: 23),
+      padding: EdgeInsets.only(top: widget.topPadding ? 15 : 0, bottom: largeFont ? 26 : 23),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Stack(alignment: Alignment.bottomCenter,
-            clipBehavior: Clip.none,
-            children: [
-              Image.asset('assets/vectorEmojis/${widget.emoji}.png', width: 65),
+          GestureDetector(behavior: HitTestBehavior.opaque,
+            onTapDown: (_) { widget.updatePoints(0); },
+            onPanUpdate: (_) { widget.updatePoints(0); },
+            child: Container(padding: EdgeInsetsGeometry.only(right: 15),
+              child: Stack(alignment: Alignment.bottomCenter,
+                clipBehavior: Clip.none,
+                children: [
+                  Image.asset('assets/vectorEmojis/${widget.emoji}.png', width: 65),
 
-              Positioned(bottom: -22,
-                  child: Text(widget.description, style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.w500,
-                  fontSize: fontSize(14, viewModel)),)
-              )
-            ],
+                  Positioned(bottom: largeFont ? -26 : -22,
+                      child: Text(widget.description, style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontWeight: FontWeight.w500,
+                      fontSize: fontSize(14, viewModel)),)
+                  )
+                ],
+              ),
+            ),
           ),
 
-          const SizedBox(width: 10),
-
-          ...dots( widget.number,  widget.size),
+          // One detector wrapping all dots
+          GestureDetector(
+            key: _dotsKey,
+            behavior: HitTestBehavior.opaque,
+            onPanStart: _onPanStart,
+            onPanEnd: _onPanEnd,
+            onPanDown: _handlePanDown,
+            onPanUpdate: _handlePanUpdate,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: buildDots(widget.number, widget.size), // widget.number is 0..5
+            ),
+          ),
 
 
           SizedBox(width: 10),
 
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                leftButtonOpacity = 1.0;
-                widget.leftButtonAction?.call();
-                // HapticFeedback.mediumImpact();
-              });
-            },
-            onTapCancel: () {
-              setState(() {
-                leftButtonOpacity = 1.0;
-              });
-            },
-            onTapDown: (_) {
-              setState(() {
-                leftButtonOpacity = 0.4;
-              });
-            },
-            child:
-              Opacity(opacity: leftButtonOpacity,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40, // Width of the circular background
-                      height: 40, // Height of the circular background
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
-                      ),
-                    ),
-                    Positioned(left: 0, right: 3,
-                        child:  Icon(CupertinoIcons.chevron_left, size: 30, color: Colors.white)),
-                  ],
-                ),
-              ),
-          ),
-
-          SizedBox(width: 8),
-
-          GestureDetector(
-              onTap: () {
-                setState(() {
-                  rightButtonOpacity = 1.0;
-                  widget.rightButtonAction?.call();
-                  // HapticFeedback.mediumImpact();
-                });
-              },
-              onTapCancel: () {
-                setState(() {
-                  rightButtonOpacity = 1.0;
-                });
-              },
-              onTapDown: (_) {
-                setState(() {
-                  rightButtonOpacity = 0.4;
-                });
-              },
-              child:
-              Opacity(opacity: rightButtonOpacity,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 40, // Width of the circular background
-                      height: 50, // Height of the circular background
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
-                      ),
-                    ),
-                    Positioned(left: 3, right: 0,
-                        child: Icon(CupertinoIcons.chevron_right, size: 30, color: Colors.white)),
-                  ],
-                ),
-              ),
-          )
+          // GestureDetector(
+          //   onTap: () {
+          //     setState(() {
+          //       leftButtonOpacity = 1.0;
+          //       widget.leftButtonAction?.call();
+          //       // HapticFeedback.mediumImpact();
+          //     });
+          //   },
+          //   onTapCancel: () {
+          //     setState(() {
+          //       leftButtonOpacity = 1.0;
+          //     });
+          //   },
+          //   onTapDown: (_) {
+          //     setState(() {
+          //       leftButtonOpacity = 0.4;
+          //     });
+          //   },
+          //   child:
+          //     Opacity(opacity: leftButtonOpacity,
+          //       child: Stack(
+          //         alignment: Alignment.center,
+          //         children: [
+          //           Container(
+          //             width: 40, // Width of the circular background
+          //             height: 40, // Height of the circular background
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
+          //             ),
+          //           ),
+          //           Positioned(left: 0, right: 3,
+          //               child:  Icon(CupertinoIcons.chevron_left, size: 30, color: Colors.white)),
+          //         ],
+          //       ),
+          //     ),
+          // ),
+          //
+          // SizedBox(width: 8),
+          //
+          // GestureDetector(
+          //     onTap: () {
+          //       setState(() {
+          //         rightButtonOpacity = 1.0;
+          //         widget.rightButtonAction?.call();
+          //         // HapticFeedback.mediumImpact();
+          //       });
+          //     },
+          //     onTapCancel: () {
+          //       setState(() {
+          //         rightButtonOpacity = 1.0;
+          //       });
+          //     },
+          //     onTapDown: (_) {
+          //       setState(() {
+          //         rightButtonOpacity = 0.4;
+          //       });
+          //     },
+          //     child:
+          //     Opacity(opacity: rightButtonOpacity,
+          //       child: Stack(
+          //         alignment: Alignment.center,
+          //         children: [
+          //           Container(
+          //             width: 40, // Width of the circular background
+          //             height: 50, // Height of the circular background
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: const Color.fromRGBO(5, 65, 149, 1.0), // Change this color if you want a visible circle
+          //             ),
+          //           ),
+          //           Positioned(left: 3, right: 0,
+          //               child: Icon(CupertinoIcons.chevron_right, size: 30, color: Colors.white)),
+          //         ],
+          //       ),
+          //     ),
+          // )
         ],
       ),
     );

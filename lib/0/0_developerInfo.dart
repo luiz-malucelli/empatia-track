@@ -91,15 +91,15 @@ class DeveloperInfoState extends State<DeveloperInfo> {
                   Padding(padding: const EdgeInsets.only(left: 35, top: 10, bottom: 5),
                       child:
                       Text(loc?.quickInfo.toUpperCase() ?? '', style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: fontSize(15, viewModel),
-                          fontWeight: FontWeight.w600)
+                          fontWeight: FontWeight.w400)
                       )
                   )
                 ]),
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface.withValues(alpha: brightness == Brightness.dark ? 1.0 : 0.7),
+                    color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Column(
@@ -162,16 +162,16 @@ class DeveloperInfoState extends State<DeveloperInfo> {
                   Padding(padding: const EdgeInsets.only(left: 35, top: 10, bottom: 5),
                       child:
                       Text(loc?.detailedInfo.toUpperCase() ?? '', style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: fontSize(15, viewModel),
-                          fontWeight: FontWeight.w600)
+                          fontWeight: FontWeight.w400)
                       )
                   )
                 ]),
 
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface.withValues(alpha: brightness == Brightness.dark ? 1.0 : 0.7),
+                    color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Column(
@@ -231,16 +231,16 @@ class DeveloperInfoState extends State<DeveloperInfo> {
                   Padding(padding: const EdgeInsets.only(left: 35, top: 10, bottom: 5),
                       child:
                       Text(loc?.contactInfo.toUpperCase() ?? '', style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: fontSize(15, viewModel),
-                          fontWeight: FontWeight.w600)
+                          fontWeight: FontWeight.w400)
                       )
                   )
                 ]),
 
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface.withValues(alpha: brightness == Brightness.dark ? 1.0 : 0.7),
+                    color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Row(

@@ -222,41 +222,61 @@ class FirebaseServices {
     final AppLocalizations? loc = AppLocalizations.of(context);
     try {
       // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final gsi = GoogleSignIn.instance;
 
-      if (googleUser == null) {
-        // Handle the case where the user cancels the sign-in process
-        return FunctionResponse.failure('googleSignInCancelledByUser');
+      // WEB: use Firebase popup—GoogleSignIn.authenticate() isn’t supported there.
+      if (kIsWeb) {
+        final provider = GoogleAuthProvider();
+        final cred = await FirebaseAuth.instance.signInWithPopup(provider);
+        final email = cred.user?.email;
+        final uid = cred.user?.uid;
+
+        if (email != null && uid != null) {
+          await FirebaseFirestore.instance.collection('users').doc(uid).set(
+            {'googleEmail': email},
+            SetOptions(merge: true),
+          );
+        }
+        return FunctionResponse.success();
       }
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
-
-      if (googleAuth == null) {
-        return FunctionResponse.failure(loc?.failedToAuthenticateGoogle ?? '');
+      // MOBILE / DESKTOP:
+      if (!gsi.supportsAuthenticate()) {
+        // Very old/unsupported platform fallback
+        return FunctionResponse.failure(loc?.failedToAuthenticateGoogle ?? 'Google Sign-In not supported on this platform.');
       }
 
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+      // Show the Google account picker and authenticate.
+      try {
+        final account = await GoogleSignIn.instance.authenticate();
+        final idToken = (await account.authentication).idToken;
+        if (idToken == null) {
+          return FunctionResponse.failure(loc?.failedToAuthenticateGoogle ?? 'Failed to obtain Google ID token.');
+        }
 
-      // Sign in with Firebase
-      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        final credential = GoogleAuthProvider.credential(idToken: idToken);
+        final userCred = await FirebaseAuth.instance.signInWithCredential(credential);
 
-      // Extract email and store it in Firestore
-      final String? email = googleUser.email;
+        // Persist email if you want
+        final email = account.email; // or userCred.user?.email
+        final uid = userCred.user?.uid;
+        if (email != null && uid != null) {
+          await FirebaseFirestore.instance.collection('users').doc(uid).set(
+            {'googleEmail': email},
+            SetOptions(merge: true),
+          );
+        }
+        // If everything goes well, return a success response
+        return FunctionResponse.success();
 
-      if (email != null) {
-        // Store the email in Firestore or your preferred database
-        await FirebaseFirestore.instance.collection('users').doc(userCredential.user?.uid).set({
-          'googleEmail': email,
-        }, SetOptions(merge: true)); // Use merge to update only the email field
+      } on GoogleSignInException catch (e) {
+        if (e.code == GoogleSignInExceptionCode.canceled) {
+          // user canceled
+          return FunctionResponse.failure('googleSignInCancelledByUser');
+        }
+        return FunctionResponse.failure('googleSignInFailed: ${e.description}');
       }
 
-      // If everything goes well, return a success response
-      return FunctionResponse.success();
     } catch (e) {
       // Handle any errors that occur during the sign-in process
       return FunctionResponse.failure(e);
@@ -312,30 +332,46 @@ class FirebaseServices {
 
 
   Future<GoogleSignInResult> getGoogleCredentialAndEmail() async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-
     try {
-      // Trigger Google sign-in flow once
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      // WEB: use Firebase popup; GoogleSignIn.authenticate() isn’t supported there.
+      if (kIsWeb) {
+        final provider = GoogleAuthProvider();
+        final userCred = await FirebaseAuth.instance.signInWithPopup(provider);
 
-      final String? email = googleUser?.email;
-      if (googleUser == null) {
-        throw Exception("Google sign-in canceled.");
+        final email = userCred.user?.email;
+        final authCred = userCred.credential;
+        if (authCred is! OAuthCredential) {
+          throw Exception('Failed to obtain OAuthCredential on web.');
+        }
+        return GoogleSignInResult(email: email, credential: authCred);
       }
 
-      // Obtain Google authentication details
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      // MOBILE / DESKTOP:
+      final gsi = GoogleSignIn.instance;
+      if (!gsi.supportsAuthenticate()) {
+        throw Exception('Google Sign-In not supported on this platform.');
+      }
 
-      // Create OAuth credential
-      final OAuthCredential googleCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+      // Shows the Google account picker and authenticates.
+      try {
+        final account = await GoogleSignIn.instance.authenticate();
+        // v7: for Firebase, you only need the ID token.
+        final idToken = (await account.authentication).idToken;
+        if (idToken == null) {
+          throw Exception('Failed to obtain Google ID token.');
+        }
 
-      // Return both the credential and the Google user account info
-      return GoogleSignInResult(email: email, credential: googleCredential);
+        final cred = GoogleAuthProvider.credential(idToken: idToken);
+        return GoogleSignInResult(email: account.email, credential: cred);
+      } on GoogleSignInException catch (e) {
+        if (e.code == GoogleSignInExceptionCode.canceled) {
+         throw Exception("Google sign-in canceled.");
+        }
+        rethrow;
+      }
+
     } catch (e) {
-      throw Exception("Error signing in with Google: $e");
+      throw Exception('Error signing in with Google: $e');
     }
   }
 
@@ -383,6 +419,26 @@ class FirebaseServices {
     }
   }
 
+  Future<void> signOutAll() async {
+    // Firebase
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      logEvent('Firebase signOut failed: ${e}');
+    }
+
+    // Google (only if supported on this platform)
+    final gsi = GoogleSignIn.instance;
+    if (gsi.supportsAuthenticate()) {
+      try {
+        await gsi.signOut();
+      } on GoogleSignInException catch (e) {
+        logEvent('Google signOut failed: ${e.code} ${e.description}');
+      } catch (e) {
+        logEvent('Google signOut failed: ${e}');
+      }
+    }
+  }
 
 
 

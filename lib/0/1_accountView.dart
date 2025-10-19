@@ -18,23 +18,15 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
-  double deleteAccountButtonOpacity = 0.7;
+  double deleteAccountButtonOpacity = 1.0;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setDeleteOpacity();
-    });
   }
 
   void logOutNeeded() {
     Navigator.of(context).pop(AccountViewResult.logOutNeeded);
-  }
-
-  void setDeleteOpacity() {
-    var brightness = Theme.of(context).brightness;
-    deleteAccountButtonOpacity = brightness == Brightness.dark ? 1.0 : 0.7;
   }
 
 
@@ -267,7 +259,7 @@ class _AccountViewState extends State<AccountView> {
                 onTap: () {
                   logEvent('delete data button tapped');
                   setState(() {
-                    deleteAccountButtonOpacity = brightness == Brightness.dark ? 1.0 : 0.7;
+                    deleteAccountButtonOpacity = 0.7;
                   });
 
                   showAlert(context: context, alertTitle: loc?.alert ?? '',
@@ -298,19 +290,19 @@ class _AccountViewState extends State<AccountView> {
                 },
                 onTapCancel: () {
                   setState(() {
-                    deleteAccountButtonOpacity = brightness == Brightness.dark ? 1.0 : 0.7;
+                    deleteAccountButtonOpacity = 1.0;
                   });
                 },
                 onTapDown: (_) {
                   setState(() {
-                    deleteAccountButtonOpacity = brightness == Brightness.dark ? 0.8 : 0.6;
+                    deleteAccountButtonOpacity = 0.8;
                   });
                 },
                 child: Opacity(
                   opacity: 1,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface.withValues(alpha: deleteAccountButtonOpacity),
+                      color: (brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0)).withValues(alpha: deleteAccountButtonOpacity),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Padding(
@@ -320,7 +312,7 @@ class _AccountViewState extends State<AccountView> {
                           padding: const EdgeInsets.only(bottom: 10, top: 10, right: 20, left: 20),
                           child: Text(loc?.deleteAccount ?? '', textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: brightness == Brightness.dark ? FontWeight.w600 : FontWeight.w500,
                                   color: (brightness == Brightness.dark) ? Color.fromRGBO(
                                       253, 124, 124, 1.0) : Color.fromRGBO(
                                       193, 77, 77, 1.0),

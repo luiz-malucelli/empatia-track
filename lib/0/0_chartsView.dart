@@ -135,6 +135,8 @@ class _ChartsViewState extends State<ChartsView> {
     // Check if the given date is within the current week
     return date.isAfter(startOfWeek.subtract(Duration(days: 1))) && date.isBefore(endOfWeek.add(Duration(days: 1)));
   }
+  
+ 
 
 
   @override
@@ -189,6 +191,41 @@ class _ChartsViewState extends State<ChartsView> {
         }
       });
       print('currentIndex is $currentIndex');
+    }
+
+    void _goToHighlight() {
+      final hightlightDate = DateTime.parse(highlights[currentIndex].date);
+      final viewModel = Provider.of<ViewModelGlobal>(context, listen: false);
+      viewModel.updateCalendarFocusedDay(hightlightDate); // update the calendar focused day
+      viewModel.updateCalendarCurrentMonth(hightlightDate); // update the calendar selected day
+      viewModel.updateCurrentMonth(hightlightDate); // update the charts day
+      viewModel.setSelectedIndex(0);
+    }
+
+    void _goToHightlightMenu(TapUpDetails details) async {
+      final position = details.globalPosition;
+
+      final selected = await showMenu<String>(
+        color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(
+            112, 196, 204, 1.0),
+        context: context,
+        position: RelativeRect.fromLTRB(
+          position.dx,
+          position.dy,
+          position.dx,
+          position.dy,
+        ),
+        items: [
+          PopupMenuItem<String>(
+            value: 'goToHighlight',
+            child: Text(loc?.checkHighlight ?? '', style: TextStyle(fontSize: fontSize(16, viewModel))),
+          ),
+        ],
+      );
+
+      if (selected == 'goToHighlight') {
+        _goToHighlight();
+      }
     }
 
 
@@ -264,7 +301,7 @@ class _ChartsViewState extends State<ChartsView> {
         actions: [Padding(
           padding: EdgeInsets.only(right: Platform.isIOS ? 15 : 13),
           child:
-          PopupMenuButton(color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.98),
+          PopupMenuButton(color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Color.fromRGBO(121, 198, 205, 1.0),
             position: PopupMenuPosition.under,
             child: Icon(Platform.isIOS ? CupertinoIcons.share : Icons.share, size: Platform.isIOS ? 28 : 26, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: shareGraphMenuOpen ? 0.5 : 1)
             ),
@@ -512,7 +549,7 @@ class _ChartsViewState extends State<ChartsView> {
 
                   ]),
                 ),
-                
+
                 const SizedBox(height: 14),
 
                 Padding(
@@ -688,53 +725,61 @@ class _ChartsViewState extends State<ChartsView> {
 
                 buildEventList(viewModel, viewModel.currentMonth, dataShown, context),
 
-                if (highlights.isNotEmpty)
+                if (highlights.isNotEmpty) ... [
                   const SizedBox(height: 50),
-                if (highlights.isNotEmpty)
                   Text(loc?.highlights ?? '', style: TextStyle(fontSize: fontSize(20, viewModel), fontWeight: FontWeight.w500, height: 0.5)),
-                if (highlights.isNotEmpty)
                   SizedBox(height: highlights.length > 1 ? 0 : 11),
-                if (highlights.isNotEmpty)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (highlights.length > 1)
-                      IconButton(
-                        icon: Icon(Icons.chevron_left, color: brightness == Brightness.dark ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-                        onPressed: _goToPrevious,
-                      ),
-                      Text(
-                        formattedDate,
-                        style: TextStyle(fontSize: fontSize(18, viewModel),  fontWeight: brightness == Brightness.dark ? FontWeight.w300 : FontWeight.w400,),
+                        IconButton(
+                          icon: Icon(Icons.chevron_left, color: brightness == Brightness.dark ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+                          onPressed: _goToPrevious,
+                        ),
+                      GestureDetector(
+                        onTapUp: _goToHightlightMenu,
+                        child: Text(
+                          formattedDate,
+                          style: TextStyle(
+                            fontSize: fontSize(18, viewModel),
+                            fontWeight:
+                            brightness == Brightness.dark ? FontWeight.w300 : FontWeight.w400,
+                          ),
+                        ),
                       ),
                       if (highlights.length > 1)
-                      IconButton(
-                        icon: Icon(Icons.chevron_right, color: brightness == Brightness.dark ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
-                        onPressed: _goToNext,
-                      ),
+                        IconButton(
+                          icon: Icon(Icons.chevron_right, color: brightness == Brightness.dark ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface),
+                          onPressed: _goToNext,
+                        ),
                     ],
                   ),
+                ],
+
                 if (highlights.length == 1)
                   const SizedBox(height: 11),
                 if (highlights.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2),
-                          ),
-                          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 20),
-                          child: Text(currentHighlight?.notes ?? '',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: fontSize(18, viewModel)),
+                  child: GestureDetector(onTapUp: _goToHightlightMenu,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 20),
+                            child: Text(currentHighlight?.notes ?? '',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(fontSize: fontSize(18, viewModel)),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 if (highlights.isNotEmpty)
@@ -760,7 +805,7 @@ class _ChartsViewState extends State<ChartsView> {
                           height: 250,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2), // Background color of the chart
+                            color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2),
                           ),
                           padding: EdgeInsets.only(bottom: 24, top: 36, right: dataShown == DataShown.byWeek ? 35 : dataShown == DataShown.byMonth ? 30 : 25, left: dataShown == DataShown.byWeek ? 35 : 25),
                           // Add padding to give space for the border
@@ -854,7 +899,7 @@ Widget buildEventList(ViewModelGlobal viewModel, DateTime month, DataShown dataS
                 height: 260,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2), // Background color of the chart
+                  color: brightness == Brightness.dark ? Theme.of(context).colorScheme.surface : Colors.white.withValues(alpha: brightness == Brightness.dark ? 0.2 : 0.2),
                 ),
                 padding: EdgeInsets.only(bottom: 14, top: paddingSize(42, viewModel), right: 12, left: 12),
                 // Add padding to give space for the border
@@ -1081,6 +1126,10 @@ class LineChartSample extends StatelessWidget {
     // Sort spots by x-value (day)
     spots.sort((a, b) => a.x.compareTo(b.x));
 
+    final maxYAxisValue = data.isEmpty
+        ? 0.0
+        : data.values.reduce((a, b) => a > b ? a : b);
+
     List<String> _getWeekdayLabels() {
       if (locale == 'pt') {
         return ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
@@ -1228,7 +1277,7 @@ class LineChartSample extends StatelessWidget {
             minX: 1,
             maxX: dataShown == DataShown.byMonth ? DateTime(month.year, month.month + 1, 0).day.toDouble() : dataShown == DataShown.byYear ? 12 : 7,
             minY: 0,
-            maxY: 5, // Adjust according to your maximum y-axis value
+            maxY: maxYAxisValue, // Adjust according to your maximum y-axis value
             lineBarsData: [
               LineChartBarData(
                 shadow: const Shadow(color: Colors.black),

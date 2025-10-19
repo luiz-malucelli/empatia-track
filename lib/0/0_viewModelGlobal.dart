@@ -119,8 +119,13 @@ class ViewModelGlobal extends ChangeNotifier {
     for (var dia in _diasSalvos) {
       DateTime date = DateFormat('yyyy-MM-dd').parse(dia.date);
       if (date.isAfter(startOfWeek.subtract(Duration(days: 1))) && date.isBefore(endOfWeek.add(Duration(days: 1)))) {
-        if (dia.emotions[0] + dia.emotions[1] >= 3) {
-          filteredDiaSalvos.add(dia);
+        final total = dia.emotions.reduce((a, b) => a + b);
+        final firstTwo = dia.emotions[0] + dia.emotions[1];
+        if (total > 0) {
+          final percent = (firstTwo / total) * 100;
+          if (percent >= 60 && firstTwo >= 2) {
+            filteredDiaSalvos.add(dia);
+          }
         }
       }
     }
@@ -221,8 +226,13 @@ class ViewModelGlobal extends ChangeNotifier {
     for (var dia in _diasSalvos) {
       DateTime date = DateFormat('yyyy-MM-dd').parse(dia.date);
       if (date.year == month.year && date.month == month.month) {
-        if (dia.emotions[0] + dia.emotions[1] >= 3) {
-          filteredDiaSalvos.add(dia);
+        final total = dia.emotions.reduce((a, b) => a + b);
+        final firstTwo = dia.emotions[0] + dia.emotions[1];
+        if (total > 0) {
+          final percent = (firstTwo / total) * 100;
+          if (percent >= 60 && firstTwo >= 2) {
+            filteredDiaSalvos.add(dia);
+          }
         }
       }
     }
@@ -352,8 +362,13 @@ class ViewModelGlobal extends ChangeNotifier {
     for (var dia in _diasSalvos) {
       DateTime date = DateFormat('yyyy-MM-dd').parse(dia.date);
       if (date.year == year.year) {
-        if (dia.emotions[0] + dia.emotions[1] >= 3) {
-          filteredDiaSalvos.add(dia);
+        final total = dia.emotions.reduce((a, b) => a + b);
+        final firstTwo = dia.emotions[0] + dia.emotions[1];
+        if (total > 0) {
+          final percent = (firstTwo / total) * 100;
+          if (percent >= 60 && firstTwo >= 2) {
+            filteredDiaSalvos.add(dia);
+          }
         }
       }
     }
@@ -451,8 +466,8 @@ class ViewModelGlobal extends ChangeNotifier {
   }
 
   // Function to get the sum of emotions for each day in the specified week
-  Map<int, int> getDailySumsForWeek(DateTime week) {
-    Map<int, int> dailySums = {};
+  Map<int, double> getDailySumsForWeek(DateTime week) {
+    Map<int, double> dailySums = {};
 
     // Calculate the start of the week (Monday)
     DateTime startOfWeek = week.subtract(Duration(days: week.weekday - 1));
@@ -467,7 +482,7 @@ class ViewModelGlobal extends ChangeNotifier {
         if (dailySums.containsKey(dayOfWeek)) {
           dailySums[dayOfWeek] = dailySums[dayOfWeek]! + sumEmotions;
         } else {
-          dailySums[dayOfWeek] = sumEmotions;
+          dailySums[dayOfWeek] = sumEmotions.toDouble();
         }
       }
     }
@@ -477,8 +492,8 @@ class ViewModelGlobal extends ChangeNotifier {
 
 
   // Function to get the sum of emotions for each day in the specified month
-  Map<int, int> getDailySumsForMonth(DateTime month) {
-    Map<int, int> dailySums = {};
+  Map<int, double> getDailySumsForMonth(DateTime month) {
+    Map<int, double> dailySums = {};
 
     for (var dia in _diasSalvos) {
       DateTime date = DateFormat('yyyy-MM-dd').parse(dia.date);
@@ -488,7 +503,7 @@ class ViewModelGlobal extends ChangeNotifier {
         if (dailySums.containsKey(day)) {
           dailySums[day] = dailySums[day]! + sumEmotions;
         } else {
-          dailySums[day] = sumEmotions;
+          dailySums[day] = sumEmotions.toDouble();
         }
       }
     }
